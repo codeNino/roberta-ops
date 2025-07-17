@@ -14,3 +14,7 @@ run: build
 .PHONY: clean
 clean:
 	docker image prune -f
+
+.PHONY: push
+push:
+	docker push $(CONTAINER_NAME):latest
