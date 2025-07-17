@@ -13,7 +13,7 @@ jobs:
     env:
       MODEL_PATH: ${{ secrets.MODEL_URI }}
       MODEL_LOCAL_DIR: src
-      MODEL_FILENAME: roberta-sequence-classification-9.onnx.onnx
+      MODEL_FILENAME: roberta-sequence-classification-9.onnx
 
     steps:
       - name: Checkout repository
@@ -36,6 +36,10 @@ jobs:
       - name: Download model from GCS
         run: |
           gcloud storage cp $MODEL_PATH $MODEL_LOCAL_DIR/$MODEL_FILENAME
+      
+      - name: Check model file before build
+        run: ls -lh src/
+
 
       # Optional: Push to Docker Hub or GCR
       - name: Log in to DockerHub
