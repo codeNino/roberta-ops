@@ -16,6 +16,11 @@ run: build
 clean:
 	docker image prune -f
 
-.PHONY: push
-push:
+
+cloud-build-image:
+	docker build -t $(HUB_IMAGE) .
+
+cloud-push-image:
 	docker push $(HUB_IMAGE)
+
+cloud-build-push-image: cloud-build-image cloud-push-image
