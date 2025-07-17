@@ -1,5 +1,6 @@
 IMAGE_NAME=roberta-sentiment
 CONTAINER_NAME=roberta-sentiment-service
+HUB_IMAGE := $(DOCKER_USERNAME)/$(IMAGE_NAME):latest
 # Build the Docker image
 .PHONY: build
 build:
@@ -17,4 +18,4 @@ clean:
 
 .PHONY: push
 push:
-	docker push $(CONTAINER_NAME):latest
+	docker push $(HUB_IMAGE)
