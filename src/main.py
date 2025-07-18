@@ -7,18 +7,21 @@ from transformers import RobertaTokenizer
 import onnxruntime
 from typing import Any
 
+
 class Dto(BaseModel):
-    input : Any
+    input: Any
+
 
 app = FastAPI()
 
 
 tokenizer = RobertaTokenizer.from_pretrained("roberta-base")
 session = onnxruntime.InferenceSession(
-"roberta-sequence-classification-9.onnx")
+                "roberta-sequence-classification-9.onnx")
+
 
 @app.post("/predict")
-def predict(dto: Dto): 
+def predict(dto: Dto):
     input_ids = torch.tensor(tokenizer.encode(
         dto.input, add_special_tokens=True
     )).unsqueeze(0)
@@ -31,8 +34,4 @@ def predict(dto: Dto):
     inputs = {session.get_inputs()[0].name: input_array}
     out = session.run(None, inputs)
     result = np.argmax(out)
-    
     return JSONResponse(bool(result))
-
-
-    
