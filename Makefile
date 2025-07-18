@@ -14,8 +14,11 @@ clean:
 install-uv:
 	curl -LsSf https://astral.sh/uv/install.sh | sh
 
-install-cloud: install-uv
-	~/.local/bin/uv sync --locked
+# install-cloud: install-uv
+# 	~/.local/bin/uv sync --locked
+
+install-cloud:
+	echo "Installing on the cloud"
 
 lint:
 	uv run flake8 src
