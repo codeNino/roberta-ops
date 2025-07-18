@@ -11,19 +11,16 @@ run: build
 clean:
 	docker image prune -f
 
-install-uv:
+cloud-install-uv:
 	curl -LsSf https://astral.sh/uv/install.sh | sh
 
-# install-cloud: install-uv
-# 	~/.local/bin/uv sync --locked
-
-install-cloud:
-	echo "Installing on the cloud"
+cloud-install-deps: cloud-install-uv
+	~/.local/bin/uv sync --locked
 
 lint:
 	uv run flake8 src
 
-lint-cloud:
+cloud-lint:
 	~/.local/bin/uv run flake8 src
 
 cloud-build-image:

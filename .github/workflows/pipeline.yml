@@ -10,10 +10,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    # env:
-    #   MODEL_PATH: ${{ secrets.MODEL_URI }}
-    #   MODEL_LOCAL_DIR: src
-    #   MODEL_FILENAME: roberta-sequence-classification-9.onnx
+    env:
+      MODEL_PATH: ${{ secrets.MODEL_URI }}
+      MODEL_LOCAL_DIR: src
+      MODEL_FILENAME: roberta-sequence-classification-9.onnx
 
     steps:
       - name: Set up Python 3.12
@@ -22,10 +22,10 @@ jobs:
           python-version: 3.12
 
       - name: Install dependencies
-        run: make install-cloud
+        run: make cloud-install-deps
 
       - name: Lint
-        run: make lint-cloud
+        run: make cloud-lint
 
 
       # - name: Checkout repository
