@@ -16,6 +16,17 @@ run: build
 clean:
 	docker image prune -f
 
+install-uv:
+	curl -LsSf https://astral.sh/uv/install.sh | sh
+
+install-cloud: install-uv
+	~/.local/bin/uv sync --locked
+
+lint:
+	uv run flake8 src
+
+lint-cloud:
+	~/.local/bin/uv run flake8 src
 
 cloud-build-image:
 	docker build -t $(HUB_IMAGE) .
