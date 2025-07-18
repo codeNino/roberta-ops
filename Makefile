@@ -14,6 +14,7 @@ clean:
 cloud-install-uv:
 	curl -LsSf https://astral.sh/uv/install.sh | sh
 
+
 cloud-install-deps: cloud-install-uv
 	~/.local/bin/uv sync --locked
 
